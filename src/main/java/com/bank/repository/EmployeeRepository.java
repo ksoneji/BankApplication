@@ -8,4 +8,10 @@ import com.bank.model.dao.Employee;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+	/**
+	 * <p> Returns the user record based on the username</p>
+	 * @param userId
+	 * @return
+	 */
+	Employee findByUsername(String username);
 }

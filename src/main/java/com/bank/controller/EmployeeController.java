@@ -22,14 +22,13 @@ import com.bank.service.EmployeeService;
 @RestController
 @RequestMapping("/api/v1/employee")
 public class EmployeeController {
-
-	 private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
 
 	@Autowired
 	EmployeeService empService;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public ResponseEntity<Employee> signUp(@RequestBody Employee employee) {
 		empService.save(employee);
 		logger.debug("Added:: " + employee);
 		return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
