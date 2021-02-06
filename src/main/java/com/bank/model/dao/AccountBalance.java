@@ -1,5 +1,7 @@
 package com.bank.model.dao;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,30 +9,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "account_balance")
 public class AccountBalance implements java.io.Serializable {
 
 	private static final long serialVersionUID = 4910225916550731486L;
 	
-	private long id;
-	private long accountId;
-	private double credit;
-	private double debit;
-	private double balance;
-	private long date;
+	private Long id;
+	private Long accountId;
+	private Double credit;
+	private Double debit;
+	private Double balance;
+	private Timestamp date;
 
 	public AccountBalance() {
 	}
 
-	public AccountBalance(long id, long accountId, double balance, long date) {
+	public AccountBalance(Long id, Long accountId, Double balance, Timestamp date) {
 		this.id = id;
 		this.accountId = accountId;
 		this.balance = balance;
 		this.date = date;
 	}
 
-	public AccountBalance(long id, long accountId, double credit, double debit, double balance, long date) {
+	public AccountBalance(Long id, Long accountId, Double credit, Double debit, Double balance, Timestamp date) {
 		this.id = id;
 		this.accountId = accountId;
 		this.credit = credit;
@@ -42,56 +46,57 @@ public class AccountBalance implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	public long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	@Column(name = "account_id")
-	public long getAccountId() {
+	public Long getAccountId() {
 		return this.accountId;
 	}
 
-	public void setAccountId(long accountId) {
+	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
 
 	@Column(name = "credit", nullable = true)
-	public double getCredit() {
+	public Double getCredit() {
 		return this.credit;
 	}
 
-	public void setCredit(double credit) {
+	public void setCredit(Double credit) {
 		this.credit = credit;
 	}
 
 	@Column(name = "debit", nullable = true)
-	public double getDebit() {
+	public Double getDebit() {
 		return this.debit;
 	}
 
-	public void setDebit(double debit) {
+	public void setDebit(Double debit) {
 		this.debit = debit;
 	}
 
 	@Column(name = "balance", nullable = false)
-	public double getBalance() {
+	public Double getBalance() {
 		return this.balance;
 	}
 
-	public void setBalance(double balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 
-	@Column(name = "date", nullable = false)
-	public long getDate() {
+	@Column(name = "date", nullable = false, insertable = false, updatable = false)
+	@CreationTimestamp
+	public Timestamp getDate() {
 		return this.date;
 	}
 
-	public void setDate(long date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 

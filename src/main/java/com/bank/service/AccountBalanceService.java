@@ -42,8 +42,8 @@ public class AccountBalanceService {
 		}
 		
 		// Calculate the balance based on credit/debit type of transaction.
-		balance = entity.getCredit() == 0.0 ? balance: (balance + entity.getCredit());
-		balance = entity.getDebit() == 0.0 ? balance: (balance - entity.getDebit());
+		balance = Objects.isNull(entity.getCredit())? balance: (balance + entity.getCredit());
+		balance = Objects.isNull(entity.getDebit()) ? balance: (balance - entity.getDebit());
 		
 		entity.setBalance(balance);
 		return acctBalanceRepository.save(entity);
