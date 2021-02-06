@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.model.dao.Account;
 import com.bank.model.dao.AccountBalance;
+import com.bank.model.json.TransferBalance;
 import com.bank.service.AccountBalanceService;
 import com.bank.service.AccountService;
 
@@ -46,6 +47,18 @@ public class AccountController {
 		return new ResponseEntity<AccountBalance>(account, HttpStatus.CREATED);
 	}
 
+	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
+	public ResponseEntity<Void> transferBalance(@RequestBody TransferBalance accounts) {
+		/**
+		 * Assumption1: The client already has the to & from accounts and the payload would always have both the account ids
+		 * If any of the account is not present then the client should not make this rest call.
+		 * Assumption2: The client has already verified that the account has enough balance to be transferred to other account.
+		 */
+		accBalanceService.transferBalance(accounts);
+		logger.debug("transferred balance from:: " + accounts.getFromAccountId() + " to::"+ accounts.getToAccountId());
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateAccount(@RequestBody Account account) {
 		Optional<Account> existingAcct = accService.getById(account.getId());
