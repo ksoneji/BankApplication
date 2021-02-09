@@ -29,6 +29,9 @@ public class EmployeeService implements UserDetailsService{
 		// Encode the password
 		employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
 		
+		// New Employee is not admin by default. The super admin or other admin can change the setting
+		employee.setIsAdmin(false);
+		
 		return employeeRepository.save(employee);
 	}
 

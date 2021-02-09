@@ -21,12 +21,12 @@ public class Employee implements java.io.Serializable {
 	private String lastName;
 	private String email;
 	private String type;
-	private byte isAdmin;
+	private boolean isAdmin;
 
 	public Employee() {
 	}
 
-	public Employee(long id, String firstName, String lastName, byte isAdmin) {
+	public Employee(long id, String firstName, String lastName, boolean isAdmin) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -63,11 +63,11 @@ public class Employee implements java.io.Serializable {
 	}
 
 	@Column(name = "is_admin", nullable = false)
-	public byte getIsAdmin() {
+	public boolean getIsAdmin() {
 		return this.isAdmin;
 	}
 
-	public void setIsAdmin(byte isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 	
