@@ -1,5 +1,7 @@
 package com.bank.repository;
 
+import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,4 +13,6 @@ import com.bank.model.dao.AccountBalance;
 public interface AccountBalanceRepository extends JpaRepository<AccountBalance, Long> {
 
 	public Optional<AccountBalance> findTopByAccountIdOrderByIdDesc (Long accountId);
+	
+	public List<AccountBalance> findAllByDateBetween(Timestamp fromDate, Timestamp toDate);
 }

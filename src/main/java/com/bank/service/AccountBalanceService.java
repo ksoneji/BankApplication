@@ -1,6 +1,7 @@
 package com.bank.service;
 
 import java.lang.invoke.MethodHandles;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -98,6 +99,10 @@ public class AccountBalanceService {
 	
 	public Optional<AccountBalance> getLatestById(Long id) {
 		return acctBalanceRepository.findTopByAccountIdOrderByIdDesc(id);
+	}
+
+	public List<AccountBalance> getByDateRange(String fromDate, String toDate) {
+		return acctBalanceRepository.findAllByDateBetween (Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
 	}
 
 }
