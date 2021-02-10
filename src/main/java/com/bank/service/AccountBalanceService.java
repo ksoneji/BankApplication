@@ -102,7 +102,7 @@ public class AccountBalanceService {
 	}
 
 	public List<AccountBalance> getByDateRange(String fromDate, String toDate) {
-		return acctBalanceRepository.findAllByDateBetween (Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
+		return acctBalanceRepository.findAllByDateBetweenOrderByIdDesc (Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
 	}
 
 }

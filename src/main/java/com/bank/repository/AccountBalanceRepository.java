@@ -14,5 +14,5 @@ public interface AccountBalanceRepository extends JpaRepository<AccountBalance, 
 
 	public Optional<AccountBalance> findTopByAccountIdOrderByIdDesc (Long accountId);
 	
-	public List<AccountBalance> findAllByDateBetween(Timestamp fromDate, Timestamp toDate);
+	public List<AccountBalance> findAllByDateBetweenOrderByIdDesc(Timestamp fromDate, Timestamp toDate);
 }
