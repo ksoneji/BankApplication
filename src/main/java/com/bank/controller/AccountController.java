@@ -1,5 +1,6 @@
 package com.bank.controller;
 
+import java.io.IOException;
 import java.lang.invoke.MethodHandles;
 import java.util.List;
 import java.util.Optional;
@@ -7,7 +8,10 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +25,8 @@ import com.bank.model.dao.AccountBalance;
 import com.bank.model.json.TransferBalance;
 import com.bank.service.AccountBalanceService;
 import com.bank.service.AccountService;
+import com.bank.utils.AccountPDFExporter;
+import com.lowagie.text.DocumentException;
 
 @RestController
 @RequestMapping("/api/v1/account")
@@ -33,6 +39,9 @@ public class AccountController {
 
 	@Autowired
 	AccountBalanceService accBalanceService;
+
+	@Value("${pdf.export.path}")
+	private String pdfExportPath;
 
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Account> addAccount(@RequestBody Account account) {
@@ -93,27 +102,42 @@ public class AccountController {
 	}
 
 	@RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
-	public ResponseEntity<List<AccountBalance>> getAccountReportByRange(@PathVariable("id") Long id,
-			@RequestParam(required = true) String fromDate, @RequestParam(required = true) String toDate) {
+	public ResponseEntity<byte[]> getAccountReportByRange(@PathVariable("id") Long id,
+			@RequestParam(required = true) String fromDate, @RequestParam(required = true) String toDate)
+			throws DocumentException, IOException {
+		
 		Optional<Account> account = accService.getById(id);
 		if (account == null || account.isEmpty()) {
 			logger.debug("Account with id " + id + " does not exists");
-			return new ResponseEntity<List<AccountBalance>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
 		logger.debug("Found Account:: " + account);
 
 		List<AccountBalance> accountBalances = accBalanceService.getByDateRange(fromDate, toDate);
 		if (accountBalances == null || accountBalances.isEmpty()) {
 			logger.debug("Account Balance for id " + id + " does not exists");
-			return new ResponseEntity<List<AccountBalance>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);
 		}
+
 		logger.debug("Found AccountBalances:: " + accountBalances);
-		return new ResponseEntity<List<AccountBalance>>(accountBalances, HttpStatus.OK);
+
+		String filename = "account_" + System.currentTimeMillis() + ".pdf";
+
+		AccountPDFExporter exporter = new AccountPDFExporter(accountBalances);
+		byte[] contents = exporter.export(pdfExportPath + filename, String.valueOf(id), fromDate, toDate);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_PDF);
+
+		headers.setContentDispositionFormData(filename, filename);
+		headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+
+		return new ResponseEntity<byte[]>(contents, headers, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteAccount(@PathVariable("id") Long id) {
-		
+
 		Optional<Account> employee = accService.getById(id);
 		if (employee == null || employee.isEmpty()) {
 			logger.debug("Account with id " + id + " does not exists");
