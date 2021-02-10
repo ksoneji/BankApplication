@@ -1,5 +1,7 @@
 package com.bank.model.dao;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name = "accounts")
 public class Account implements java.io.Serializable {
@@ -19,14 +23,16 @@ public class Account implements java.io.Serializable {
 	private long id;
 	private Customer customer;
 	private String accountType;
+	private Timestamp createdDate;
 
 	public Account() {
 	}
 
-	public Account(long id, Customer customer, String accountType) {
+	public Account(long id, Customer customer, String accountType, Timestamp createdDate) {
 		this.id = id;
 		this.customer = customer;
 		this.accountType = accountType;
+		this.createdDate = createdDate;
 	}
 
 	@Id
@@ -57,6 +63,16 @@ public class Account implements java.io.Serializable {
 
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
+	}
+
+	@Column(name = "created_date", nullable = false, insertable = false, updatable = false)
+	@CreationTimestamp
+	public Timestamp getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Timestamp createdDate) {
+		this.createdDate = createdDate;
 	}
 
 }
