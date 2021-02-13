@@ -1,6 +1,7 @@
 package com.bank.controller;
 
 import java.lang.invoke.MethodHandles;
+import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bank.model.dao.Customer;
+import com.bank.model.dao.CustomerKyc;
 import com.bank.service.CustomerService;
 
 @RestController
@@ -48,7 +50,6 @@ public class CustomerController {
 		}
 	}
 
-
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Customer> getCustomer(@PathVariable("id") Long id) {
 		Optional<Customer> customer = custService.getById(id);
@@ -59,7 +60,6 @@ public class CustomerController {
 		logger.debug("Found Customer:: " + customer);
 		return new ResponseEntity<Customer>(customer.get(), HttpStatus.OK);
 	}
-
 
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Customer>> getAllCustomers() {
@@ -88,4 +88,50 @@ public class CustomerController {
 		}
 	}
 
+	@RequestMapping(value = "/kyc", method = RequestMethod.POST)
+	public ResponseEntity<CustomerKyc> addCustomerKyc(@RequestBody CustomerKyc customerKyc) {
+		
+		Optional<Customer> existingCust = custService.getById(customerKyc.getCustomerId());
+		if (existingCust == null || existingCust.isEmpty()) {
+			logger.debug("Customer with id " + customerKyc.getCustomerId() + " does not exists");
+			return new ResponseEntity<CustomerKyc>(HttpStatus.NOT_FOUND);
+		} else {
+			// Additional check. Ideally the UI should not send this call in case of updates. It should use the PUT method for updates
+			// Alternatively, we can merge the POST/PUT into one call and handle creates/updates.
+			Optional<CustomerKyc> existingCustKyc = custService.getCustomerKyc(customerKyc.getCustomerId());
+			if (existingCustKyc.isPresent()) {
+				logger.debug("KYC for Customer with id " + customerKyc.getId() + " does not exists");
+				return new ResponseEntity<CustomerKyc>(HttpStatus.BAD_REQUEST);
+			}		
+			logger.debug("Added KYC:: " + customerKyc);
+			custService.saveCustomerKyc(customerKyc);
+			return new ResponseEntity<CustomerKyc>(customerKyc, HttpStatus.CREATED);
+		}
+	}
+
+	@RequestMapping(value = "/kyc", method = RequestMethod.PUT)
+	public ResponseEntity<Void> updateCustomerKyc(@RequestBody CustomerKyc customerKyc) {
+		Optional<CustomerKyc> existingCustKyc = custService.getCustomerKyc(customerKyc.getCustomerId());
+		if (existingCustKyc == null || existingCustKyc.isEmpty()) {
+			logger.debug("KYC for Customer with id " + customerKyc.getId() + " does not exists");
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		} else {
+			logger.debug("Updated KYC:: " + customerKyc);
+			Timestamp currentTimeStamp = new Timestamp(System.currentTimeMillis());
+			customerKyc.setModifiedDate(currentTimeStamp);
+			custService.saveCustomerKyc(customerKyc);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		}
+	}
+	
+	@RequestMapping(value = "/kyc/{customerId}", method = RequestMethod.GET)
+	public ResponseEntity<CustomerKyc> getCustomerKyc(@PathVariable("customerId") Long customerId) {
+		Optional<CustomerKyc> customerKyc = custService.getCustomerKyc(customerId);
+		if (customerKyc == null || customerKyc.isEmpty()) {
+			logger.debug("KYC for Customer with id " + customerId + " does not exists");
+			return new ResponseEntity<CustomerKyc>(HttpStatus.NOT_FOUND);
+		}
+		logger.debug("Found Customer Kyc:: " + customerKyc);
+		return new ResponseEntity<CustomerKyc>(customerKyc.get(), HttpStatus.OK);
+	}
 }

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bank.model.dao.Customer;
+import com.bank.model.dao.CustomerKyc;
+import com.bank.repository.CustomerKycRepository;
 import com.bank.repository.CustomerRepository;
 
 @Service
@@ -15,6 +17,9 @@ public class CustomerService {
 	@Autowired
 	private CustomerRepository customerRepository;
 
+	@Autowired
+	private CustomerKycRepository customerKycRepository;
+	
 	public Customer save(Customer entity) {
 		return customerRepository.save(entity);
 	}
@@ -29,6 +34,14 @@ public class CustomerService {
 
 	public void delete(Long id) {
 		customerRepository.deleteById(id);
+	}
+	
+	public CustomerKyc saveCustomerKyc(CustomerKyc entity) {
+		return customerKycRepository.save(entity);
+	}
+
+	public Optional<CustomerKyc> getCustomerKyc(Long customerId) {
+		return customerKycRepository.findByCustomerId(customerId);
 	}
 
 }
