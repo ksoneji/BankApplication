@@ -30,5 +30,10 @@ public class AccountService {
 	public void delete(Long id) {
 		accountRepository.deleteById(id);
 	}
+	
+	public List<Account> getAccountsForInterestCalculation() {
+		return accountRepository.findAccountsForInterestCalculation();
+	}
+	
 
 }

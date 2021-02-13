@@ -20,6 +20,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<akka.version>2.5.26</akka.version>
+		<open.pdf.version>1.3.8</open.pdf.version>
+		<jwt.version>3.4.0</jwt.version>
 	</properties>
 
 	<dependencies>
@@ -38,7 +41,7 @@
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
-			<version>3.4.0</version>
+			<version>${jwt.version}</version>
 		</dependency>	
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
@@ -52,8 +55,13 @@
 		<dependency>
 		    <groupId>com.github.librepdf</groupId>
 		    <artifactId>openpdf</artifactId>
-		    <version>1.3.8</version>
-		</dependency>		
+		    <version>${open.pdf.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>com.typesafe.akka</groupId>
+			<artifactId>akka-actor_2.11</artifactId>
+			<version>${akka.version}</version>
+		</dependency>			
 	</dependencies>
 
 	<build>
