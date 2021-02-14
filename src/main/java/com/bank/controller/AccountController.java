@@ -13,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ public class AccountController {
 	@Value("${pdf.export.path}")
 	private String pdfExportPath;
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Account> addAccount(@RequestBody Account account) {
 		accService.save(account);
@@ -50,6 +52,7 @@ public class AccountController {
 		return new ResponseEntity<Account>(account, HttpStatus.CREATED);
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/balance", method = RequestMethod.POST)
 	public ResponseEntity<AccountBalance> addAccountBalance(@RequestBody AccountBalance account) {
 		accBalanceService.save(account);
@@ -57,6 +60,7 @@ public class AccountController {
 		return new ResponseEntity<AccountBalance>(account, HttpStatus.CREATED);
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/transfer", method = RequestMethod.POST)
 	public ResponseEntity<Void> transferBalance(@RequestBody TransferBalance accounts) {
 		/**
@@ -71,6 +75,7 @@ public class AccountController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateAccount(@RequestBody Account account) {
 		Optional<Account> existingAcct = accService.getById(account.getId());
@@ -83,6 +88,7 @@ public class AccountController {
 		}
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/{id}/balance", method = RequestMethod.GET)
 	public ResponseEntity<AccountBalance> getAccount(@PathVariable("id") Long id) {
 		Optional<Account> account = accService.getById(id);
@@ -101,6 +107,7 @@ public class AccountController {
 		return new ResponseEntity<AccountBalance>(accountBalance.get(), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/report/{id}", method = RequestMethod.GET)
 	public ResponseEntity<byte[]> getAccountReportByRange(@PathVariable("id") Long id,
 			@RequestParam(required = true) String fromDate, @RequestParam(required = true) String toDate)
@@ -135,6 +142,7 @@ public class AccountController {
 		return new ResponseEntity<byte[]>(contents, headers, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteAccount(@PathVariable("id") Long id) {
 

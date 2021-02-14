@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class CustomerController {
 	@Autowired
 	CustomerService custService;
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
 		custService.save(customer);
@@ -37,7 +39,7 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
 	}
 
-
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateCustomer(@RequestBody Customer customer) {
 		Optional<Customer> existingCust = custService.getById(customer.getId());
@@ -50,6 +52,7 @@ public class CustomerController {
 		}
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Customer> getCustomer(@PathVariable("id") Long id) {
 		Optional<Customer> customer = custService.getById(id);
@@ -61,6 +64,7 @@ public class CustomerController {
 		return new ResponseEntity<Customer>(customer.get(), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Customer>> getAllCustomers() {
 		List<Customer> customers = custService.getAll();
@@ -74,7 +78,7 @@ public class CustomerController {
 		return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
 	}
 
-
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteCustomer(@PathVariable("id") Long id) {
 		Optional<Customer> customer = custService.getById(id);
@@ -88,6 +92,7 @@ public class CustomerController {
 		}
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/kyc", method = RequestMethod.POST)
 	public ResponseEntity<CustomerKyc> addCustomerKyc(@RequestBody CustomerKyc customerKyc) {
 		
@@ -109,6 +114,7 @@ public class CustomerController {
 		}
 	}
 
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/kyc", method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateCustomerKyc(@RequestBody CustomerKyc customerKyc) {
 		Optional<CustomerKyc> existingCustKyc = custService.getCustomerKyc(customerKyc.getCustomerId());
@@ -124,6 +130,7 @@ public class CustomerController {
 		}
 	}
 	
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	@RequestMapping(value = "/kyc/{customerId}", method = RequestMethod.GET)
 	public ResponseEntity<CustomerKyc> getCustomerKyc(@PathVariable("customerId") Long customerId) {
 		Optional<CustomerKyc> customerKyc = custService.getCustomerKyc(customerId);

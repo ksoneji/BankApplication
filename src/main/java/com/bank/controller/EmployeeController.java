@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,7 @@ public class EmployeeController {
 	}
 
 
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.PUT)
 	public ResponseEntity<Void> updateEmployee(@RequestBody Employee employee) {
 		Optional<Employee> existingEmp = empService.getById(employee.getId());
@@ -47,7 +49,7 @@ public class EmployeeController {
 		}
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Employee> getEmployee(@PathVariable("id") Long id) {
 		Optional<Employee> employee = empService.getById(id);
@@ -59,7 +61,7 @@ public class EmployeeController {
 		return new ResponseEntity<Employee>(employee.get(), HttpStatus.OK);
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Employee>> getAllEmployees() {
 		List<Employee> employees = empService.getAll();
@@ -73,7 +75,7 @@ public class EmployeeController {
 		return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
 	}
 
-
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Void> deleteEmployee(@PathVariable("id") Long id) {
 		Optional<Employee> employee = empService.getById(id);
