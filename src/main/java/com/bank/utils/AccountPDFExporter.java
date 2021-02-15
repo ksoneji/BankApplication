@@ -68,7 +68,10 @@ public class AccountPDFExporter {
 
 		cell.setPhrase(new Phrase("Balance", font));
 		table.addCell(cell);
-
+		
+		cell.setPhrase(new Phrase("Comment", font));
+		table.addCell(cell);
+		
 		cell.setPhrase(new Phrase("Date", font));
 		table.addCell(cell);
 	}
@@ -86,6 +89,7 @@ public class AccountPDFExporter {
 			table.addCell(String.valueOf(Objects.isNull(record.getCredit()) ? "0" : record.getCredit()));
 			table.addCell(String.valueOf(Objects.isNull(record.getDebit()) ? "0" : record.getDebit()));
 			table.addCell(String.valueOf(record.getBalance()));
+			table.addCell(String.valueOf(record.getComment()));
 			table.addCell(String.valueOf(record.getDate()));
 		}
 	}
@@ -126,9 +130,9 @@ public class AccountPDFExporter {
 
 		document.add(p);
 
-		PdfPTable table = new PdfPTable(5);
+		PdfPTable table = new PdfPTable(6);
 		table.setWidthPercentage(100f);
-		table.setWidths(new float[] { 1.0f, 3.0f, 3.0f, 3.0f, 2.5f });
+		table.setWidths(new float[] { 1.0f, 1.5f, 1.5f, 2.0f, 3.0f, 3.5f });
 		table.setSpacingBefore(10);
 
 		writeTableHeader(table);
