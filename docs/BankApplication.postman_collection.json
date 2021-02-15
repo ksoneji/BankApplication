@@ -1,0 +1,753 @@
+{
+	"info": {
+		"_postman_id": "0f41f34c-cb8d-4578-906e-3958a1496098",
+		"name": "BankApplication",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Employee",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"username\": \"rupamsharma\",\r\n\"password\": \"test2\",\r\n\"email\": \"test123@1245test.com\",\r\n\"firstName\": \"Rupam\",\r\n\"lastName\": \"Sharma\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/employee/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"username\": \"rupamsharma\",\r\n\"password\": \"test2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/employee/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydXBhbXNoYXJtYSIsInJvbGVzIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjEzMzU0ODQ2fQ.PxKcY-eJGL-hkWAslBPmdeYDmw0gF2yoH5iq1ngB3TCMSv2RlmzjbehqPuBNCeg_rs-B05LWDJjYOIp7GaJu0Q",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"username\": \"adamsmith\",\r\n\"password\": \"test1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/employee/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMzMjcyMjV9.p92rHOIBJw_XCyBwAs-ursYvYyNo6m28YJk5fA8CSi3k5BSKVghXqJM1sWDChXIq8jOG16EVlkiow24I0RYE8A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/employee/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Details of a user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydXBhbXNoYXJtYSIsInJvbGVzIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjEzMzM0OTY4fQ.rx9qGfMbFk0BZFyQmoWWkfx9p3CYGVN1C_X5iefyypFl_vDnB06sCw1Jw2MyhByM4dJx80KjC-Z_nMzqqatq1g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/employee/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMzMjcyMjV9.p92rHOIBJw_XCyBwAs-ursYvYyNo6m28YJk5fA8CSi3k5BSKVghXqJM1sWDChXIq8jOG16EVlkiow24I0RYE8A"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 6,\r\n    \"username\": \"adamsmith\",\r\n    \"password\": \"test1\",\r\n    \"email\": \"test123@1248test.com\",\r\n    \"firstName\": \"Adam\",\r\n    \"lastName\": \"Smith\",\r\n    \"isAdmin\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/employee/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMzMjcyMjV9.p92rHOIBJw_XCyBwAs-ursYvYyNo6m28YJk5fA8CSi3k5BSKVghXqJM1sWDChXIq8jOG16EVlkiow24I0RYE8A",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/employee/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"employee",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Create Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTI2NDY1NTh9.gNnnrPQXcJN2u8GDw_l93dbXl6d5E_fpP03sUZn5lRlexnExlYfmU7tGB1bJ4mQuK3JIgQJWHslcFNPp-fFw_g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"firstName\": \"Tom\",\r\n\"lastName\": \"Alter\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydXBhbXNoYXJtYSIsInJvbGVzIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjEzMzU0ODQ2fQ.PxKcY-eJGL-hkWAslBPmdeYDmw0gF2yoH5iq1ngB3TCMSv2RlmzjbehqPuBNCeg_rs-B05LWDJjYOIp7GaJu0Q",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTI2NDY1NTh9.gNnnrPQXcJN2u8GDw_l93dbXl6d5E_fpP03sUZn5lRlexnExlYfmU7tGB1bJ4mQuK3JIgQJWHslcFNPp-fFw_g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"firstName\": \"Tom\",\r\n    \"lastName\": \"Alter\",\r\n    \"address\": \"North First street, CA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTI2NDY1NTh9.gNnnrPQXcJN2u8GDw_l93dbXl6d5E_fpP03sUZn5lRlexnExlYfmU7tGB1bJ4mQuK3JIgQJWHslcFNPp-fFw_g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Customer Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTI2NDY1NTh9.gNnnrPQXcJN2u8GDw_l93dbXl6d5E_fpP03sUZn5lRlexnExlYfmU7tGB1bJ4mQuK3JIgQJWHslcFNPp-fFw_g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create KYC for Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMyNTQ5Nzd9.MrRGZ-MdEhDtzv6Q0hjuQxoVkdtB-sEXBWsbL6rr2s7vlLDD8qNnwz5HaN_CqcRt6yTGSgxt-_IBd34sLI8plQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"customerId\": 4,\r\n\"firstName\": \"Alter\",\r\n\"middleName\": \"kkk\",\r\n\"lastName\": \"Tom\",\r\n\"address\" : \"123 Old Oaks, Palo Alto\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/kyc/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								"kyc",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update KYC for Customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMyNTY0MzJ9.N2l5L2TVR6H-rOS2Xj4ldRV79FYI7X9xigWlHdGklA7h4bBxalukYIKzF-ze5SkkiH2tcDcFpjPPq1qDSqUpsQ"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"id\": 5,\r\n\"customerId\": 4,\r\n\"firstName\": \"Alter\",\r\n\"middleName\": \"ww12\",\r\n\"lastName\": \"Tom\",\r\n\"address\" : \"123 Old Oaks, Palo Alto\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/kyc/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								"kyc",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get KYC for Customer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMyNTc4MDB9.ZalqW5QoPPuajzVXuxPJ_8a5Vxn4G7zTeCLgWq-Hl50dZih94iQ2caFhsP7aXyIbe52k5BpevQm2oH3zwFKQgQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/customer/kyc/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"customer",
+								"kyc",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account Transaction",
+			"item": [
+				{
+					"name": "Create/Link Account for a Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMyNDAzODl9.TZs7O1U_n1hbhVFShrvIm4x4tqA7ss8B749qfLAbFQBjio7ZbVkWW2kWmTCMLrJ4a_gDA65fonbLr8bPP5HMPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"customer\":{\r\n    \"id\": 4\r\n},\r\n\"accountType\": \"savings\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/account/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Balance to a Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTMyNDAzODl9.TZs7O1U_n1hbhVFShrvIm4x4tqA7ss8B749qfLAbFQBjio7ZbVkWW2kWmTCMLrJ4a_gDA65fonbLr8bPP5HMPA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"accountId\": 15,\r\n\"credit\": 2000,\r\n\"debit\": null,\r\n\"comment\": \"amount credited\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/account/balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Export Data to PDF for a given Date Range",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydXBhbXNoYXJtYSIsInJvbGVzIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjEzMzc2Njk3fQ.MqxUFmOroI1ngrSJ2ynsRXZ6ZBD5tivlKeCSuGBd1ZEFeYV30Kx6Cqx4trNOSclSBbwmFWU9UHBBCnv0iaaliQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/account/report/13?fromDate=2021-02-07 12%3A00%3A00.000&toDate=2021-12-31 22%3A00%3A00.000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"report",
+								"13"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2021-02-07 12%3A00%3A00.000"
+								},
+								{
+									"key": "toDate",
+									"value": "2021-12-31 22%3A00%3A00.000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transfer Balance to a different Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydXBhbXNoYXJtYSIsInJvbGVzIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjEzMzc2Njk3fQ.MqxUFmOroI1ngrSJ2ynsRXZ6ZBD5tivlKeCSuGBd1ZEFeYV30Kx6Cqx4trNOSclSBbwmFWU9UHBBCnv0iaaliQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"fromAccountId\": 15,\r\n\t\"fromAccountBalance\": 2070,\r\n\t\"toAccountId\": 13,\r\n\t\"toAccountBalance\": 4036.50,\r\n\t\"transferAmount\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/account/transfer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Balance For a Account",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJydXBhbXNoYXJtYSIsInJvbGVzIjoiUk9MRV9VU0VSIiwiZXhwIjoxNjEzMzc2Njk3fQ.MqxUFmOroI1ngrSJ2ynsRXZ6ZBD5tivlKeCSuGBd1ZEFeYV30Kx6Cqx4trNOSclSBbwmFWU9UHBBCnv0iaaliQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/account/13/balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"13",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZGFtc21pdGgiLCJleHAiOjE2MTI2NDc4OTh9.KLsn11U-3kAwO9QnloyK2_8tpUPS8hIERVDJyFV2ORKCbVnzoMMjjE6CcmipQ40co4N_c9q6-ErR5FLHDY72IQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/account/14",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
