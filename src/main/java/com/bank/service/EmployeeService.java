@@ -1,12 +1,15 @@
 package com.bank.service;
 
-import java.util.ArrayList;
+import java.lang.invoke.MethodHandles;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,12 +18,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bank.auth.SecurityConstants;
 import com.bank.model.dao.Employee;
 import com.bank.repository.EmployeeRepository;
 
 @Service
 public class EmployeeService implements UserDetailsService {
-
+	private static final Logger logger = LogManager.getLogger(MethodHandles.lookup().lookupClass());
+	
 	@Autowired
 	private EmployeeRepository employeeRepository;
 
@@ -71,5 +76,11 @@ public class EmployeeService implements UserDetailsService {
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 		return authorities;
 	}
-
+	
+	@CachePut(value = SecurityConstants.BLACKLIST_TOKEN_CACHE, key="#token")
+	public String logout (String token)
+	{
+		logger.debug("Updating cache with token::"+token);
+		return token;
+	}
 }

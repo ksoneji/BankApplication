@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bank.auth.SecurityConstants;
 import com.bank.model.dao.Employee;
 import com.bank.service.EmployeeService;
 
@@ -34,7 +37,6 @@ public class EmployeeController {
 		logger.debug("Added:: " + employee);
 		return new ResponseEntity<Employee>(employee, HttpStatus.CREATED);
 	}
-
 
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.PUT)
@@ -87,6 +89,14 @@ public class EmployeeController {
 			logger.debug("Employee with id " + id + " deleted");
 			return new ResponseEntity<Void>(HttpStatus.GONE);
 		}
+	}
+
+	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public ResponseEntity<Void> logout(HttpServletRequest request) {
+		String token = request.getHeader(SecurityConstants.HEADER_STRING);
+		empService.logout(token);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.bank.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,6 +22,9 @@ import com.bank.service.EmployeeService;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private EmployeeService userDetailsService;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
+	@Autowired
+	private CacheManager cacheManager;
 
     public WebSecurity(EmployeeService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userDetailsService = userDetailsService;
@@ -33,7 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new AuthenticationFilter(authenticationManager()))
-                .addFilter(new AuthorizationFilter(authenticationManager()))
+                .addFilter(new AuthorizationFilter(authenticationManager(), cacheManager))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

@@ -7,4 +7,5 @@ public class SecurityConstants {
     public static final String HEADER_STRING = "Authorization";
 	public static final String REGISTER_URL = "/api/v1/employee/register";
 	public static final String AUTHORITIES_KEY = "roles";
+	public static final String BLACKLIST_TOKEN_CACHE = "blacklistedTokens";
 }
