@@ -6,7 +6,9 @@ import akka.actor.AbstractExtensionId;
 import akka.actor.ExtendedActorSystem;
 import akka.actor.Extension;
 import akka.actor.Props;
-
+/**
+ * @author Ketan.Soneji
+ */
 public class SpringExtension
       extends AbstractExtensionId<SpringExtension.SpringExt>
 {

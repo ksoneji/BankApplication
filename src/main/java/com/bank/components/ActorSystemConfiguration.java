@@ -7,7 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import akka.actor.ActorSystem;
-
+/**
+ * <p>The configuration class to setup the Akka ActorSystem</p>
+ * 
+ * @author Ketan.Soneji
+ */
 @Configuration
 @ComponentScan
 public class ActorSystemConfiguration

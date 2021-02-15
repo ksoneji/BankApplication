@@ -21,7 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bank.model.dao.Customer;
 import com.bank.model.dao.CustomerKyc;
 import com.bank.service.CustomerService;
-
+/**
+ * <p>Rest Controller to handle Customer related transactions</p>
+ * 
+ * @author Ketan.Soneji
+ */
 @RestController
 @RequestMapping("/api/v1/customer")
 public class CustomerController {

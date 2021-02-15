@@ -15,6 +15,11 @@ import com.bank.model.dao.AccountBalance;
 import com.bank.model.json.TransferBalance;
 import com.bank.repository.AccountBalanceRepository;
 
+/**
+ * <p>Service class to handle Account balance related transactions.</p>
+ * 
+ * @author Ketan.Soneji
+ */
 @Service
 public class AccountBalanceService {
 
@@ -26,7 +31,15 @@ public class AccountBalanceService {
 	@Autowired
 	AccountBalanceService accBalanceService;
 	
+	/**
+	 * <p>Save the account transaction.</p>
+	 * 
+	 * @param entity
+	 * @return
+	 */
 	public AccountBalance save(AccountBalance entity) {
+		
+		logger.debug("Generating account transaction: {}", entity);
 		
 		/**
 		 * There is no need to have an additional check if the account is debited/credited for the logged-in user
@@ -57,7 +70,12 @@ public class AccountBalanceService {
 		return acctBalanceRepository.save(entity);
 	}
 
+	/**
+	 * <p>Transfer the balance(credit/debit) between two accounts.</p>
+	 * @param accounts
+	 */
 	public void transferBalance(TransferBalance accounts) {
+		logger.debug("Transferring balance from account::{} to account:{}", accounts.getFromAccountId(), accounts.getToAccountId());
 		
 		/**
 		 * Future: we can put an additional check to verify if the accounts belong the the logged in user.
@@ -85,24 +103,58 @@ public class AccountBalanceService {
 		save(toAccount);
 	}
 	
+	/**
+	 * <p>Find account transaction by Id</p>
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Optional<AccountBalance> getById(Long id) {
+		logger.debug("Fetching details for the transaction id::{} ", id);
 		return acctBalanceRepository.findById(id);
 	}
 
+	/**
+	 * <p> Get all the account transactions. </p>
+	 * 
+	 * @return
+	 */
 	public List<AccountBalance> getAll() {
+		logger.debug("Fetching all the transactions");
 		return acctBalanceRepository.findAll();
 	}
 
+	/**
+	 * <p>Delete an account transaction</p>
+	 * 
+	 * @param id
+	 */
 	public void delete(Long id) {
+		logger.debug("Delete record for the transaction id::{} ", id);
 		acctBalanceRepository.deleteById(id);
 	}
 	
+	/**
+	 * <p> Get the last transaction for an account.</p>
+	 * 
+	 * @param id
+	 * @return
+	 */
 	public Optional<AccountBalance> getLatestById(Long id) {
+		logger.debug("Fetching the latest transaction record for the account::{} ", id);
 		return acctBalanceRepository.findTopByAccountIdOrderByIdDesc(id);
 	}
 
-	public List<AccountBalance> getByDateRange(String fromDate, String toDate) {
-		return acctBalanceRepository.findAllByDateBetweenOrderByIdDesc (Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
+	/**
+	 * <p>Fetch transactions for an account between a specified date range </p>
+	 * 
+	 * @param fromDate
+	 * @param toDate
+	 * @return
+	 */
+	public List<AccountBalance> getByDateRange(Long accountId, String fromDate, String toDate) {
+		logger.debug("Fetching account transactions for account::{} from date::{} to date::{}");
+		return acctBalanceRepository.findByAccountIdAndDateBetweenOrderByIdDesc (accountId, Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
 	}
 
 }

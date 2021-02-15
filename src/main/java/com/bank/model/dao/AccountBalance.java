@@ -10,7 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-
+/**
+ * @author Ketan.Soneji
+ */
 @Entity
 @Table(name = "account_balance")
 public class AccountBalance implements java.io.Serializable {

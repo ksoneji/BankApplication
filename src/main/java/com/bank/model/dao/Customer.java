@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "customer")
 public class Customer implements java.io.Serializable {
 
-	private static final long serialVersionUID = 4910225916550731448L;
+	private static final long serialVersionUID = 4910225816550731448L;
 	
 	private long id;
 	private String firstName;
@@ -90,5 +90,4 @@ public class Customer implements java.io.Serializable {
 	public void setAccounts(Set<Account> accounts) {
 		this.accounts = accounts;
 	}
-
 }

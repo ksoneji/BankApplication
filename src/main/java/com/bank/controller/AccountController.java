@@ -28,7 +28,11 @@ import com.bank.service.AccountBalanceService;
 import com.bank.service.AccountService;
 import com.bank.utils.AccountPDFExporter;
 import com.lowagie.text.DocumentException;
-
+/**
+ * <p>Rest Controller to handle Account related transactions</p>
+ * 
+ * @author Ketan.Soneji
+ */
 @RestController
 @RequestMapping("/api/v1/account")
 public class AccountController {
@@ -120,7 +124,7 @@ public class AccountController {
 		}
 		logger.debug("Found Account:: " + account);
 
-		List<AccountBalance> accountBalances = accBalanceService.getByDateRange(fromDate, toDate);
+		List<AccountBalance> accountBalances = accBalanceService.getByDateRange(account.get().getId(), fromDate, toDate);
 		if (accountBalances == null || accountBalances.isEmpty()) {
 			logger.debug("Account Balance for id " + id + " does not exists");
 			return new ResponseEntity<byte[]>(HttpStatus.NOT_FOUND);

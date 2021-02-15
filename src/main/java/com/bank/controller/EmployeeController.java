@@ -22,7 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bank.auth.SecurityConstants;
 import com.bank.model.dao.Employee;
 import com.bank.service.EmployeeService;
-
+/**
+ * <p>Rest Controller to handle Employee related transactions</p>
+ * 
+ * @author Ketan.Soneji
+ */
 @RestController
 @RequestMapping("/api/v1/employee")
 public class EmployeeController {

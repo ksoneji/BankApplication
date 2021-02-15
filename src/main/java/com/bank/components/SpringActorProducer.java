@@ -4,7 +4,11 @@ import org.springframework.context.ApplicationContext;
 
 import akka.actor.Actor;
 import akka.actor.IndirectActorProducer;
-
+/**
+ * <p>The configuration class to produce Spring Actors</p>
+ * 
+ * @author Ketan.Soneji
+ */
 public class SpringActorProducer implements IndirectActorProducer
 {
 

@@ -1,5 +1,9 @@
 package com.bank.auth;
-
+/**
+ * <p>The constants class used for Authentication/Authorization</p>
+ * 
+ * @author Ketan.Soneji
+ */
 public class SecurityConstants {
     public static final String SECRET = "SecretKeyToGenJWT";
     public static final long EXPIRATION_TIME = 900_000; // 15 mins

@@ -13,7 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
-
+/**
+ * @author Ketan.Soneji
+ */
 @Entity
 @Table(name = "accounts")
 public class Account implements java.io.Serializable {

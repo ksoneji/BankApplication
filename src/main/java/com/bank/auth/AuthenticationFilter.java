@@ -22,7 +22,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.bank.model.dao.Employee;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+/**
+ * <p>The filter class to perform authentication</p>
+ * 
+ * @author Ketan.Soneji
+ */
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authenticationManager;
 

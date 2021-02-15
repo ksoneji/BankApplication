@@ -27,7 +27,6 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
  * </p>
  * 
  * @author Ketan.Soneji
- *
  */
 public final class Json
 {
@@ -544,7 +543,7 @@ public final class Json
     * The custom runtime exception - JsonException
     * </p>
     * 
-    * @author Darpan.Thanki
+    * @author Ketan.Soneji
     *
     */
    public static final class JsonException extends RuntimeException
